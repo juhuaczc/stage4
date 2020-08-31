@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script>
+         Vue.component('my-com',{
+            template:`
+                <div>
+                    <h1>我是my-com组件内容</h1>
+                    <slot></slot>
+                    <slot name="blue"></slot>
+                    <h1>我是my-com组件内容</h1>
+                </div>
+            `
+        });
+        let vm = new Vue({
+            el: "#app",
+            template:`
+                <div>
+                    <my-com>
+                        <h1 style="color:pink">我是vue</h1>
+                        <h1 slot="blue" style="color:skyblue">我是vue</h1>
+                    </my-com>
+                </div>
+            `
+        });
+
+
+       
+    </script>
+</body>
+</html>

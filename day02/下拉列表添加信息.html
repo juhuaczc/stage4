@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <select val-model="">
+            <option v-for="({pid:p},index) in pros" :value="index">{{p}}</option>
+        </select>
+
+        <select val-model="">
+            <option v-for="({pname},index) in pros" :value="index">{{pname}}</option>
+        </select>
+        <span>{{price}}</span>
+        <input type="number">
+        <button @click="add">进货</button>
+        <table>
+            <tr>
+                <td>编号</td>
+                <td>名称</td>
+                <td>单价</td>
+                <td>库存</td>
+            </tr>
+            <tr v-for="p in reponstory">
+                <td>{{p.pid}}</td>
+                <td>{{p.pname}}</td>
+                <td>{{p.price}}</td>
+                <td>{{p.count}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                count:10,
+                idx:0,
+                reponstory: [],// 库存数据
+                // 货架上的数据
+                pros: [
+                    { pid: 1, pname: "华为", price: 3000, count: 0 },
+                    { pid: 2, pname: "小米", price: 2000, count: 0 },
+                    { pid: 3, pname: "黑鲨", price: 1500, count: 0 },
+                ]
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

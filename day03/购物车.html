@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+<body>
+    <div id="app">
+        <cart1 @send="sd"></cart1>
+        <cart2 :aa='ad'></cart2>
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('cart1',{
+            template:`
+                <div>111111</div>
+                `,
+            created(){
+                
+                console.log('cart1')
+                this.$emit('send',"1a1a1a1a")
+            }
+        })
+        Vue.component('cart2',{
+            props:{
+                'aa':String,
+                
+            },
+            template:`
+                <div>22222</div>
+                `,
+            created(){
+                console.log('cart2')
+                // this.$emit
+            }
+        })
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                ad:'11111vue'
+            },
+            methods: {
+                sd(a){
+                    console.log(a)
+                    this.ad = a
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部组件</title>
+</head>
+<body>
+    <h1>局部组件</h1>
+    <div id="app">
+        <my-com></my-com>
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {x:10},
+            methods: {},
+            // 局部组件只能在当前实例中使用
+            components:{
+                "":{},
+                "":{},
+                // key 表示组件名称
+                "my-com": {
+                    data() {
+                        return {a:1}
+                    },
+                    methods: {},
+                    computed: {},
+                    methods: {},
+                    template:`
+                    <div>{{a}}</div>
+                    `
+                }
+            }
+        });
+    </script>
+</body>
+</html>

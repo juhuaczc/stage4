@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.number.lazy="score">
+        <button @click="add">点击</button>
+        <h1>{{num}}</h1>
+        <h1>你的等第是: {{ level }}</h1>
+        <h1>
+            调用methods中show方法
+            {{ show() }}
+        </h1>
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                score:0,
+                num: 0
+            },
+            methods: {
+                show(){
+                    console.log('show 方法');
+                },
+                add(){
+                    this.num++;
+                }
+            },
+            computed: {
+              /*   level:{
+                    set(){
+
+                    },
+                    get(){
+
+                    }
+                } */
+                level(){
+                    // 调用的get方法
+                    // level的结果依赖于this.score
+                    // 当this.score发生变化时，就会触发level重新计算
+                    console.log("computed")
+                    return  this.score>90?"优秀":this.score>=80?"良好":this.score>=60?"及格":"不及格";
+                }
+            }
+           
+        });
+    </script>
+</body>
+</html>

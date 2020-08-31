@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    table{
+        border-spacing:0;
+        width:500px;
+
+        border: 1px solid red;
+    }
+    td{
+        border: 1px solid red;
+    }
+   /*  tr:nth-child(odd){
+        background-color: red;
+    }
+    tr:nth-child(1){
+        background-color: blue;
+    } */
+    .classA{
+       background:#ccc ; 
+    }
+    .classB{
+       background:#9cc ; 
+    }
+</style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <td>学号</td>
+                <td>名字</td>
+                <td>性别</td>
+            </tr>
+            <!-- 按顺序写 A在前 style里面A也在前 -->
+            <!-- <tr v-for="(stu,i) in stus" :class="{classA:true,classB:i%2==1}"> -->
+            <tr v-for="(stu,i) in stus" :class="i%2==1?'classA':'classB'">
+                <td v-text="stu.id"></td>
+                <td>{{stu.name}}</td>
+                <td>{{stu.gender}}</td>              
+            </tr>
+        </table>
+
+        <button @click="sort">点击按照性别排序</button>
+
+
+
+
+    </div>
+
+
+    <script src="../vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                stus:[
+                    {id:1,name:'张三',gender:'F'},//a
+                    {id:2,name:'丽丽',gender:'M'},//b
+                    {id:3,name:'王磊',gender:'F'},
+                    {id:4,name:'张苗',gender:'M'},
+                    {id:5,name:'王浩',gender:'F'}
+                ]
+
+            },
+            methods: {
+                sort(){
+                   this.stus.sort((a,b)=>{
+                       console.log(a,b)
+                       return a.gender.charCodeAt(0)-b.gender.charCodeAt(0);
+                   })
+
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

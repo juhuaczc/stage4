@@ -1,0 +1,22 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state:{
+    show:true
+  },
+  getters:{
+  },
+  mutations: {
+    close(state){
+      state.show = false
+    },
+    open(state){
+      state.show = true
+    }
+  },
+  actions:{
+  }
+})

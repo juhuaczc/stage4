@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .out{
+        width: 400px;
+        height: 400px;
+        background: pink;
+    }
+    .inner{
+        width: 200px;
+        height: 200px;
+        background: skyblue;
+    }
+    .style_red{
+        border:1px solid red;
+        height: 50px;
+    }
+</style>
+<body>
+    <div id="app">
+        <div class="out" @click.self="c1">
+           <div class="inner" @click="c2"></div> 
+        </div>
+        <a :href="baidu" @click.prevent="c1">xxx</a>
+        <input type="text" @blur="show">
+        <div>
+            <h3>v-bind</h3>
+            <button @click="load">加载图片</button>
+            <img v-bind:src="path" @click="change">
+            <div :class="red"></div>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                path:'timg.jpg',
+                red:'style_red',
+                baidu:"http://baidu.com"
+            },
+            methods: {
+                c1(){
+                    alert('这是c1')
+                },
+                c2(){
+                    alert('This is c2')
+                },
+                show(){
+                    alert('触发了onblur')
+                },
+                load(){
+                    alert('开始加载图片');
+                    setTimeout(()=>{
+                        this.path = ''
+                    },2000)
+                },
+                change(){
+                    this.path = this.path == "timg.jpg"?"eason.jpg":"timg.jpg"
+                }
+            }
+        })
+       
+
+    </script>
+</body>
+</html>

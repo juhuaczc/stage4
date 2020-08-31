@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+
+<body>
+    <div id="app">
+        省份：
+        <select v-model="index">
+            <option v-for="(p,i) in pros" :value="i">{{p}}</option>
+        </select>
+
+        <h1>城市 watch</h1>
+        <select v-model="idx">
+            <option v-for="(c,i) in cities1" :value="i">{{c}}</option>
+        </select>
+
+        <h1>城市 computed</h1>
+        <select v-model="idx">
+            <option v-for="(c,i) in cities2" :value="i">{{c}}</option>
+        </select>
+
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                pros: [
+                    "江苏", "山东", "安徽", "浙江", "湖北"
+                ],
+                index: 0,
+                idx:0,
+                cities1: [],
+                cities: [
+                    ["南京", "苏州", "扬州", "泰州", "徐州"],
+                    ["济南", "日照", "青岛", "潍坊", "莱芜"],
+                    ["合肥", "六安", "滁州", "黄山", "蚌埠"],
+                    ["宁波", "杭州", "温州", "金华", "义乌"],
+                    ["武汉", "黄冈", "荆门", "宜昌", "十堰"]
+                ]
+            },
+            methods: {
+
+            },
+            computed: {
+               cities2(){
+                   console.log(this.cities)
+                   console.log(this.cities[this.index])
+                   this.idx=0
+                    return this.cities[this.index]
+               }
+            },
+            watch: {
+                index: {
+                    handler(newVal) {
+                        this.idx=0
+                        this.cities1 = this.cities[newVal]
+                        
+                    },
+                    immediate: true
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

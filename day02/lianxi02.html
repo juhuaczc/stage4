@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="add">增加</button>
+        <button @click="reduce">降低</button>
+        <h3>
+            当前温度{{ temp2 }}
+            建议穿：{{ cloth }}
+        </h3>
+        <h1>watch:</h1>
+        <h3>
+            建议穿衣：{{ suggest }}
+        </h3>
+    </div>
+    
+    <script src="../vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                temp: 15,
+                suggest: '毛衣'
+            },
+            methods: {
+                add(){
+                    this.temp++;
+                },
+                reduce(){
+                    this.temp--;
+                }
+            },
+            
+            computed: {
+                // 当依赖的值发生变化时执行
+                temp2(){
+                    return this.temp+"℃";
+                },
+                cloth(){
+                    if(this.temp>20){
+                        return '短袖'
+                    }
+                    if(this.temp>10){
+                        return '长袖'
+                    }
+                    return '貂'
+                }
+            },
+            watch: {
+                temp(val){
+                    if(val>20){
+                        this.suggest = '短袖'
+                        return;
+                    }
+                    if(val>10){
+                        this.suggest = '场袖'
+                        return;
+                    }
+                    this.suggest = '貂'
+
+                }
+            },
+            
+        });
+    </script>
+</body>
+</html>

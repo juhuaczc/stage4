@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>练习3</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="good"> <button @click="add">添加</button>
+		<table border="1" cellspacing="0">
+			<tr>
+				<th>编号</th>
+				<th>名称</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>操作</th>
+			</tr>
+			<tr v-for="(g,i) in goods">
+				<td> {{ g.id }} </td>
+				<td> {{ g.name }} </td>
+				<td> {{ g.price }} </td>
+				<td> {{ g.count }} </td>
+				<td><button @click="del(i)">删除</button></td>
+			</tr>
+		</table>
+	</div>
+
+
+	<script src="../vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el: "#app",
+			data: {
+				good: "",
+				goods: []
+			},
+			methods: {
+				add() {
+					let arr = this.good.split(" ");
+					for(var k=0; k<this.goods.length; k++) {
+						if(arr[1] == this.goods[k].name) {
+							arr[3] = Number(arr[3])+Number(this.goods[k].count);
+							this.goods.splice(k, 1, {id: arr[0],name: arr[1],price: arr[2],count: arr[3]});
+							return;
+						}
+					}
+					this.goods.push({id: arr[0],name: arr[1],price: arr[2],count: arr[3]});
+				},
+				del(i) {
+					this.goods.splice(i, 1);
+				}
+			}
+		});
+	</script>
+</body>
+</html>
